@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# A handy script to launch a simulation for development purposes.
+# Input: This script takes a python script as input from command prompt.
+# example: letsfly simple_mission.py
+
+# Set GPS co-ordinates for your home location.
+/home/ajay/.local/bin/dronekit-sitl copter --home 98.60319880975646,13.7636648118496,0,180&
+sleep 5
+
+echo "Launching QGC"
+/usr/local/bin/QGC.AppImage 2>/dev/null&
+sleep 5
+
+echo "Launching MAVproxy on local/SITL"
+screen -dm mavproxy.py --master=tcp:127.0.0.1:5760 --out=127.0.0.1:14550 --out=127.0.0.1:5762
+/usr/bin/python "$1" --connect 127.0.0.1:5762
+
+echo "Killing all that it spawned."
+function finish {
+  kill -9 $(ps -eF | grep mv | awk -F' ' '{print $2}')
+  kill -9 $(ps -eF | grep QGC | awk -F' ' '{print $2}')
+  kill -9 $(ps -eF | grep ardu | awk -F' ' '{print $2}')
+}
+
+trap finish EXIT

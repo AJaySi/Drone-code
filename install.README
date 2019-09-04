@@ -1,0 +1,67 @@
+Optional: Getting Started:
+
+https://www.virtualbox.org/wiki/Downloads
+Link: https://www.virtualbox.org/
+
+OS: Ubuntu 16.04
+Where to download Ubuntu Image from?
+http://releases.ubuntu.com/16.04/
+(Its important that we use a common Desktop version Ubuntu version (16.04 Xenial) so
+that our environments are as close to the same as possible.)
+
+----------------
+# Install Ardupilot
+
+Look up the official guide from ardupilot OR
+
+On VM Terminal:	
+cd $autosoar; mkdir apm; cd apm
+
+# git clone only copter branch for demo, now.
+git clone -b Copter-3.5.5 https://github.com/ArduPilot/ardupilot.git
+
+cd ardupilot; git submodule update --init --recursive
+
+# Add to system $PATH variable 
+cd Tools/ardutest; pwd
+vim ~/.bashrc (at the end of the file add/insert the following)
+export PATH="pwd-output-from-above":$PATH
+
+source ~/.bashrc
+
+cd ardupilot dir and fire ./waf list_boards
+
+---------------
+
+# Easier Way
+
+0). Do create a virtual environment(optional)
+
+1). To get started, setup your linux system for it(tested: ubuntu-16):
+Note: Clone this Repo, or only copy the requirements.txt, for setup.
+
+
+2). If you get past #1, then execute the below:
+pip3 install -r requirements.txt
+
+
+3). Install QGC or QGroundControl
+Download nad install from below:
+https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html
+
+Then execute this on the downloaded file:
+$ chmod +x QGroundControl.AppImage 
+
+Can be launched QGC by running:
+$ ./QGroundControl.AppImage
+
+
+
+Referances:
+MAVlink : https://arxiv.org/pdf/1906.10641.pdf
+http://python.dronekit.io/guide/vehicle_state_and_parameters.html
+https://ardupilot.github.io/MAVProxy/html/modules/index.html
+https://ardupilot.github.io/MAVProxy/html/index.html
+http://ardupilot.org/dev/docs/copter-sitl-mavproxy-tutorial.html
+http://ardupilot.org/copter/docs/parameters.html
+http://ardupilot.org/copter/docs/flight-modes.html
