@@ -37,12 +37,13 @@ mode GUIDED
 arm throttle
 take 10
 
-# Enter to get the prompt back. 
+#Enter to get the prompt back. 
 Use the map and right click to choose 'fly here'. 
 Check the equivalent command in the MAV windows.
 
 Telemetry is in the thrid window.
 After pre-requisite of installing as per install.README, execute as follows:
+
 ----
 
 ## examples folder
